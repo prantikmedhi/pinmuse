@@ -37,37 +37,41 @@ def shadowed(canvas: Image.Image, im: Image.Image, xy, angle: float = 0) -> None
     canvas.alpha_composite(layer, (int(xy[0] - layer.width / 2), int(xy[1] - layer.height / 2)))
 
 
-def hero() -> None:
-    W, H = 2400, 1100
-    bg = Image.new("RGB", (W, H), "#0F0D0C")
-    # aura
-    aura = Image.new("RGB", (W // 4, H // 4), "#0F0D0C")
+def hero(W: int = 2400, H: int = 1100, out: str = "hero.jpg") -> None:
+    """Cozy banner: oat ground, terracotta and sage glow, cocoa ink, warm cards. Scales to any size."""
+    k = H / 1100
+    bg = Image.new("RGB", (W, H), "#F3E9DC")
+    aura = Image.new("RGB", (W // 4, H // 4), "#F3E9DC")
     d = ImageDraw.Draw(aura)
-    for (x, y, r, c) in [(120, 60, 130, "#5B1A2E"), (420, 220, 160, "#2D0B59"), (560, 40, 120, "#7A5C3E")]:
-        d.ellipse([x - r, y - r, x + r, y + r], fill=c)
-    bg = Image.blend(bg, aura.filter(ImageFilter.GaussianBlur(60)).resize((W, H)), .9)
-    bg = fx.grain(bg, .03).convert("RGBA")
-    picks = [("neon-poster", -9, 1400, 600), ("dark-academia-quote", -3, 1640, 520), ("vaporwave-story", 4, 1880, 560),
-             ("old-money-magazine", 10, 2130, 600), ("coastal-polaroid", -6, 1700, 860)]
-    for name, ang, x, y in picks[:4]:
-        shadowed(bg, card(str(G / f"{name}.jpg"), 330), (x, y), ang)
+    for (x, y, r, c) in [(.06, .1, .14, "#E8B79A"), (.55, .95, .2, "#C9D2B4"), (.92, .15, .16, "#E9C9A8"),
+                         (.3, .9, .1, "#EED6C4")]:
+        cx, cy, rr = x * W / 4, y * H / 4, r * W / 4
+        d.ellipse([cx - rr, cy - rr, cx + rr, cy + rr], fill=c)
+    bg = Image.blend(bg, aura.filter(ImageFilter.GaussianBlur(70 * k)).resize((W, H)), .85)
+    bg = fx.grain(bg, .025).convert("RGBA")
+    picks = [("dark-academia-quote", -8, .585, .55), ("boho-minimal", -2, .69, .47), ("coastal-polaroid", 5, .795, .53),
+             ("luxe-collage", 11, .88, .56)]
+    for name, ang, x, y in picks:
+        shadowed(bg, card(str(G / f"{name}.jpg"), int(330 * k)), (x * W, y * H), ang)
+    ink, soft, mute = "#3B2A20", "#6B4E3D", "#9A7B66"
     d = ImageDraw.Draw(bg)
-    d.text((140, 250), "pinmuse", font=font("PlayfairDisplay", 210, 800), fill="#F5EFE6")
-    d.text((148, 520), "Your AI agent explores Pinterest by itself", font=font("Inter", 50, 600), fill="#F5EFE6")
-    d.text((148, 590), "and makes aesthetic posters, stories & posts.", font=font("Inter", 50, 400), fill="#CBBFB0")
+    L = int(.058 * W) if W / H < 2.1 else 140
+    d.text((L, 250 * k), "pinmuse", font=font("PlayfairDisplay", int(210 * k), 800), fill=ink)
+    d.text((L + 8 * k, 520 * k), "Your AI agent explores Pinterest by itself", font=font("Inter", int(48 * k), 600), fill=ink)
+    d.text((L + 8 * k, 586 * k), "and makes aesthetic posters, stories & posts.", font=font("Inter", int(48 * k), 400), fill=soft)
     tags = ["Claude Code", "Codex", "Gemini CLI", "Antigravity", "opencode", "OpenClaw", "Hermes", "MCP"]
-    x, y = 148, 720
-    f = font("SpaceGrotesk", 30, 600)
+    x, y = L + 8 * k, 715 * k
+    f = font("SpaceGrotesk", int(30 * k), 600)
     for t in tags:
         tw = d.textlength(t, font=f)
-        if x + tw + 56 > 1080:
-            x, y = 148, y + 74
-        d.rounded_rectangle([x, y, x + tw + 44, y + 56], 28, outline="#F5EFE6", width=2)
-        d.text((x + 22, y + 10), t, font=f, fill="#F5EFE6")
-        x += tw + 60
-    d.text((148, 930), "no screenshots  ·  any image model  ·  14 aesthetics  ·  10 templates  ·  15 formats",
-           font=font("SpaceGrotesk", 28, 500), fill="#9C8F80")
-    bg.convert("RGB").save(M / "hero.jpg", quality=90)
+        if x + tw + 56 * k > W * .45:
+            x, y = L + 8 * k, y + 74 * k
+        d.rounded_rectangle([x, y, x + tw + 44 * k, y + 56 * k], 28 * k, fill="#FBF6EF", outline="#C98F6E", width=2)
+        d.text((x + 22 * k, y + 10 * k), t, font=f, fill=ink)
+        x += tw + 60 * k
+    d.text((L + 8 * k, 930 * k), "no screenshots  ·  any image model  ·  14 aesthetics  ·  10 templates  ·  15 formats",
+           font=font("SpaceGrotesk", int(27 * k), 500), fill=mute)
+    bg.convert("RGB").save(M / out, quality=92)
 
 
 def pipeline() -> None:
@@ -114,12 +118,9 @@ def gallery_strip() -> None:
 
 def social_preview() -> None:
     """1280×640 GitHub social preview (Settings → General → Social preview)."""
-    W, H = 1280, 640
-    hero = Image.open(M / "hero.jpg").convert("RGB")
-    hero = hero.resize((W, round(hero.height * W / hero.width)), Image.LANCZOS)
-    bg = Image.new("RGB", (W, H), "#0F0D0C")
-    bg.paste(hero, (0, (H - hero.height) // 2))
-    bg.save(M / "social-preview.jpg", quality=92)
+    hero(1280 * 2, 640 * 2, "social-preview.jpg")
+    im = Image.open(M / "social-preview.jpg")
+    im.resize((1280, 640), Image.LANCZOS).save(M / "social-preview.jpg", quality=92)
 
 
 def moodboard_demo() -> None:
