@@ -93,3 +93,10 @@ def test_create_end_to_end_local_inspo(images, tmp_path):
                title="Study Season", provider="procedural", out_dir=str(tmp_path), seed=1)
     assert Path(m["outputs"][0]).exists() and Path(m["caption"]).exists()
     assert m["hashtags"] and m["moodboard"]
+
+
+def test_http_rejects_non_http_schemes():
+    import pytest
+    from pinmuse import http
+    with pytest.raises(ValueError):
+        http.request("GET", "file:///etc/passwd")

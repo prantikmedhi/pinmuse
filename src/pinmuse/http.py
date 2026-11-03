@@ -49,6 +49,9 @@ def request(
     throttle: bool = False,
     retries: int = 2,
 ) -> bytes:
+    # URLs can come from Pinterest data; urllib would otherwise happily open file:// and ftp://.
+    if not url.lower().startswith(("http://", "https://")):
+        raise ValueError(f"refusing non-http(s) URL: {url[:80]}")
     if params:
         url = url + ("&" if "?" in url else "?") + urlencode(params)
     hdrs = {"User-Agent": DEFAULT_UA}
