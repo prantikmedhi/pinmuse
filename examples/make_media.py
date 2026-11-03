@@ -5,7 +5,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -37,41 +37,37 @@ def shadowed(canvas: Image.Image, im: Image.Image, xy, angle: float = 0) -> None
     canvas.alpha_composite(layer, (int(xy[0] - layer.width / 2), int(xy[1] - layer.height / 2)))
 
 
-def hero(W: int = 2400, H: int = 1100, out: str = "hero.jpg") -> None:
-    """Cozy banner: oat ground, terracotta and sage glow, cocoa ink, warm cards. Scales to any size."""
-    k = H / 1100
-    bg = Image.new("RGB", (W, H), "#F3E9DC")
-    aura = Image.new("RGB", (W // 4, H // 4), "#F3E9DC")
-    d = ImageDraw.Draw(aura)
-    for (x, y, r, c) in [(.06, .1, .14, "#E8B79A"), (.55, .95, .2, "#C9D2B4"), (.92, .15, .16, "#E9C9A8"),
-                         (.3, .9, .1, "#EED6C4")]:
-        cx, cy, rr = x * W / 4, y * H / 4, r * W / 4
-        d.ellipse([cx - rr, cy - rr, cx + rr, cy + rr], fill=c)
-    bg = Image.blend(bg, aura.filter(ImageFilter.GaussianBlur(70 * k)).resize((W, H)), .85)
-    bg = fx.grain(bg, .025).convert("RGBA")
-    picks = [("dark-academia-quote", -8, .585, .55), ("boho-minimal", -2, .69, .47), ("coastal-polaroid", 5, .795, .53),
-             ("luxe-collage", 11, .88, .56)]
-    for name, ang, x, y in picks:
-        shadowed(bg, card(str(G / f"{name}.jpg"), int(330 * k)), (x * W, y * H), ang)
-    ink, soft, mute = "#3B2A20", "#6B4E3D", "#9A7B66"
+def hero(W: int = 2400, H: int = 1200, out: str = "hero.jpg") -> None:
+    """Editorial banner: paper ground, serif wordmark, a straight row of real outputs. No glows, no tilt."""
+    k = H / 1200
+    paper, ink, soft, rule = "#F5F1EA", "#1B1714", "#6E655C", "#D9D1C5"
+    bg = Image.new("RGB", (W, H), paper)
     d = ImageDraw.Draw(bg)
-    L = int(.058 * W) if W / H < 2.1 else 140
-    d.text((L, 250 * k), "pinmuse", font=font("PlayfairDisplay", int(210 * k), 800), fill=ink)
-    d.text((L + 8 * k, 520 * k), "Your AI agent explores Pinterest by itself", font=font("Inter", int(48 * k), 600), fill=ink)
-    d.text((L + 8 * k, 586 * k), "and makes aesthetic posters, stories & posts.", font=font("Inter", int(48 * k), 400), fill=soft)
-    tags = ["Claude Code", "Codex", "Gemini CLI", "Antigravity", "opencode", "OpenClaw", "Hermes", "MCP"]
-    x, y = L + 8 * k, 715 * k
-    f = font("SpaceGrotesk", int(30 * k), 600)
-    for t in tags:
-        tw = d.textlength(t, font=f)
-        if x + tw + 56 * k > W * .45:
-            x, y = L + 8 * k, y + 74 * k
-        d.rounded_rectangle([x, y, x + tw + 44 * k, y + 56 * k], 28 * k, fill="#FBF6EF", outline="#C98F6E", width=2)
-        d.text((x + 22 * k, y + 10 * k), t, font=f, fill=ink)
-        x += tw + 60 * k
-    d.text((L + 8 * k, 930 * k), "no screenshots  ·  any image model  ·  14 aesthetics  ·  10 templates  ·  15 formats",
-           font=font("SpaceGrotesk", int(27 * k), 500), fill=mute)
-    bg.convert("RGB").save(M / out, quality=92)
+    m = int(110 * k)
+    # right half: story-format outputs (9:16), so nothing is cropped
+    names = [n for n in ["old-money-magazine", "ceramics-open-studio", "book-club-story"]
+             if (G / f"{n}.jpg").exists()][:3]
+    gap = int(16 * k)
+    tw = min(int((H - 2 * m) * 9 / 16), int((W * .54 - gap * (len(names) - 1)) / len(names)))
+    th = int(tw * 16 / 9)
+    x = W - m - tw * len(names) - gap * (len(names) - 1)
+    split, y0 = x, (H - th) // 2
+    for n in names:
+        bg.paste(ImageOps.fit(Image.open(G / f"{n}.jpg").convert("RGB"), (tw, th), Image.LANCZOS), (x, y0))
+        x += tw + gap
+    # left: type
+    L = m
+    d.text((L, m), "OPEN SOURCE  ·  AGENT SKILL  ·  CLI  ·  MCP", font=font("SpaceGrotesk", int(24 * k), 600), fill=soft)
+    d.text((L - 6 * k, m + 150 * k), "pinmuse", font=font("PlayfairDisplay", int(176 * k), 700), fill=ink)
+    lines = ["Your AI agent studies Pinterest,", "then designs the post."]
+    for i, ln in enumerate(lines):
+        d.text((L, m + 420 * k + i * 70 * k), ln, font=font("Inter", int(50 * k), 500), fill=ink)
+    d.text((L, m + 600 * k), "Posters, stories and carousels with real typography.", font=font("Inter", int(30 * k), 400), fill=soft)
+    d.text((L, m + 646 * k), "Works with any image model, or none.", font=font("Inter", int(30 * k), 400), fill=soft)
+    y = H - m - 40 * k
+    d.line([L, y - 30 * k, split - 80 * k, y - 30 * k], fill=rule, width=max(1, int(2 * k)))
+    d.text((L, y), "github.com/prantikmedhi/pinmuse", font=font("SpaceGrotesk", int(26 * k), 500), fill=ink)
+    bg.save(M / out, quality=92)
 
 
 def pipeline() -> None:

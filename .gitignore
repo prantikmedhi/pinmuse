@@ -9,3 +9,6 @@ pinmuse-out/
 examples/gallery/_runs/
 .env
 outputs/_runs/
+.claude/
+site/.vercel/
+.vercel/

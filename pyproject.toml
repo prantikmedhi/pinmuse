@@ -43,7 +43,7 @@ all = ["mcp>=1.2", "playwright>=1.40"]
 pinmuse = "pinmuse.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/prantikmedhi/pinmuse"
+Homepage = "https://pinmuse.vercel.app"
 Documentation = "https://github.com/prantikmedhi/pinmuse#readme"
 Source = "https://github.com/prantikmedhi/pinmuse"
 Issues = "https://github.com/prantikmedhi/pinmuse/issues"
