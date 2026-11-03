@@ -48,21 +48,39 @@ Each design is a single `pinmuse create` command. Images by `gpt-image-2.5-flare
 <td><img src="outputs/desert-roadtrip.jpg" alt="Desert road trip polaroid post"></td>
 </tr>
 <tr>
-<td><img src="outputs/boho-minimal.jpg" alt="Terracotta ceramics minimal post"></td>
-<td><img src="outputs/gothic-poster.jpg" alt="Gothic candle product poster"></td>
-<td><img src="outputs/clean-girl-poster.jpg" alt="Beauty routine poster"></td>
-<td><img src="outputs/brutalist-swiss.jpg" alt="Brutalist exhibition poster"></td>
+<td><img src="outputs/moon-desert.jpg" alt="Surreal desert film poster with a giant moon"></td>
+<td><img src="outputs/jellyfish-story.jpg" alt="Bioluminescent jellyfish Instagram story"></td>
+<td><img src="outputs/flower-burst.jpg" alt="Exploding flower petals florist post"></td>
+<td><img src="outputs/iceland-swiss.jpg" alt="Iceland travel journal swiss poster"></td>
 </tr>
 </table>
 
-Carousels come out as a cover, numbered slides and an end card:
+Carousels get a new photo on every slide: a cover, numbered slides and an end card. Give each slide a `subject` and pinmuse generates a picture for it.
 
 <p>
-<img src="outputs/pastel-carousel-1.jpg" width="19%" alt="Instagram carousel cover">
-<img src="outputs/pastel-carousel-2.jpg" width="19%" alt="Instagram carousel slide 1">
-<img src="outputs/pastel-carousel-3.jpg" width="19%" alt="Instagram carousel slide 2">
-<img src="outputs/pastel-carousel-4.jpg" width="19%" alt="Instagram carousel slide 3">
-<img src="outputs/pastel-carousel-5.jpg" width="19%" alt="Instagram carousel end slide">
+<img src="outputs/unreal-places-1.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 1">
+<img src="outputs/unreal-places-2.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 2">
+<img src="outputs/unreal-places-3.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 3">
+<img src="outputs/unreal-places-4.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 4">
+<img src="outputs/unreal-places-5.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 5">
+<img src="outputs/unreal-places-6.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 6">
+</p>
+
+<p>
+<img src="outputs/neon-photo-tips-1.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 1">
+<img src="outputs/neon-photo-tips-2.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 2">
+<img src="outputs/neon-photo-tips-3.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 3">
+<img src="outputs/neon-photo-tips-4.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 4">
+<img src="outputs/neon-photo-tips-5.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 5">
+<img src="outputs/neon-photo-tips-6.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 6">
+</p>
+
+<p>
+<img src="outputs/coffee-guide-1.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 1">
+<img src="outputs/coffee-guide-2.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 2">
+<img src="outputs/coffee-guide-3.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 3">
+<img src="outputs/coffee-guide-4.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 4">
+<img src="outputs/coffee-guide-5.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 5">
 </p>
 
 The raw generations underneath each design are in [`outputs/photos`](outputs/photos). More on the [website](https://pinmuse.vercel.app).
@@ -120,6 +138,13 @@ pinmuse suggest   "cozy reading"                 # Pinterest's own related searc
 pinmuse moodboard "dark academia library"        # palette, mood, aesthetic, contact sheet
 pinmuse generate  "<prompt>" -f ig-post --refs pin1.jpg,pin2.jpg
 pinmuse compose   -t quote -f ig-post --image generated.png --title "Paradise is a kind of library."
+```
+
+Carousels take a slides file; each slide's `subject` becomes its own image:
+
+```bash
+pinmuse create "salt flat mirror at sunset" -t carousel --slides slides.json --title "Places that look unreal"
+# slides.json: [{"title": "Zhangjiajie, China", "body": "Pillars in the fog.", "subject": "sandstone pillars in fog at dawn"}, …]
 ```
 
 ## How it works

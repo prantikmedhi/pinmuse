@@ -73,6 +73,10 @@ prints JSON. If `pinmuse` is not on PATH, use
 | Colour inspiration | `palette` | `pin` |
 | Tips, how-to, listicle | `carousel` (pass `--slides`) | `ig-post` |
 
+Carousel slides are a JSON list: `[{"title": "…", "body": "…", "subject": "…"}]`. `create` generates one picture
+per slide from its `subject` (or from the deck subject plus the slide title), so give each slide a concrete,
+visual subject: a place, an object, a macro detail.
+
 All formats: `pinmuse list formats`. Any `WIDTHxHEIGHT` also works. Aesthetic presets:
 `pinmuse list aesthetics`. See [references/aesthetics.md](references/aesthetics.md) for when to use
 each, and [references/craft.md](references/craft.md) for copy and layout rules that make posts get saves.

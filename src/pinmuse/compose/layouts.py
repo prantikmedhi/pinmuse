@@ -53,9 +53,13 @@ def ink(pal: list[str], bg_lum: float) -> str:
     """Pick the palette colour that reads best on a background of this luminance."""
     dark = min(pal, key=_lum)
     light = max(pal, key=_lum)
-    if bg_lum > 140:
-        return dark if _lum(dark) < 90 else "#141414"
-    return light if _lum(light) > 200 else "#FAFAF7"
+    dark = dark if _lum(dark) < 90 else "#141414"
+    light = light if _lum(light) > 200 else "#FAFAF7"
+    # WCAG contrast, not a fixed cut-off: mid-tones like hot pink need dark ink
+    rel = lambda v: ((v / 255 + .055) / 1.055) ** 2.4  # noqa: E731
+    bg = rel(bg_lum)
+    ratio = lambda c: (max(rel(_lum(c)), bg) + .05) / (min(rel(_lum(c)), bg) + .05)  # noqa: E731
+    return dark if ratio(dark) >= ratio(light) else light
 
 
 def accent(pal: list[str], against: str | None = None) -> str:
@@ -386,7 +390,7 @@ def palette_card(ds: Design) -> Image.Image:
 
 
 def carousel(ds: Design) -> list[Image.Image]:
-    """Cover + content slides + save/share slide — the highest-engagement IG format."""
+    """Cover, then one full-bleed photo slide per tip, then a save/share card."""
     W, H = ds.fmt.width, ds.fmt.height
     slides = [poster(ds)]
     col_bg = ds.palette[0]
@@ -394,36 +398,47 @@ def carousel(ds: Design) -> list[Image.Image]:
     acc = accent(ds.palette, col_bg)
     num_col = acc if abs(_lum(acc) - _lum(col_bg)) > 70 else col
     total = len(ds.slides) + 2
+    m = int(W * .08)
+    split = int(H * .58)
+    pics = ds.images[1:] or ds.images
     for i, s in enumerate(ds.slides, start=2):
         img = Image.new("RGB", (W, H), col_bg)
-        d = ImageDraw.Draw(img)
-        m = int(W * .09)
-        pics = ds.images[1:] or ds.images
         if pics:
-            p = pics[(i - 2) % len(pics)]
-            strip = fx.rounded(load(p, (W - 2 * m, int(H * .36)), ds.palette), int(W * .02))
-            img.paste(strip, (m, int(H * .56)), strip)
-        nf = font(ds.display_font, int(W * .16), 700)
-        d.text((m, m - int(W * .03)), f"{i - 1:02d}", font=nf, fill=num_col)
-        f, lines, lh = fit(d, s.get("title", ""), ds.display_font, W - 2 * m, int(H * .16), int(W * .085), 700, 1.04)
-        y = draw_lines(d, (m, int(H * .2)), lines, f, lh, col)
-        bf, bl, blh = fit(d, s.get("body", ""), ds.body_font, W - 2 * m, int(H * .56) - y - int(W * .07), int(W * .038), 400, 1.42)
-        draw_lines(d, (m, y + int(W * .03)), bl, bf, blh, col)
-        pf = font(ds.body_font, int(W * .022), 500)
-        draw_lines(d, (m, H - int(W * .055)), [f"{i}/{total}"], pf, 0, col, align="right", box_w=W - 2 * m)
+            img.paste(load(pics[(i - 2) % len(pics)], (W, split), ds.palette), (0, 0))
+        d = ImageDraw.Draw(img)
+        pf = font(ds.body_font, int(W * .022), 600)
+        # step badge sits on the photo's bottom edge
+        badge = f"{i - 1:02d}"
+        bf = font(ds.display_font, int(W * .05), 700)
+        bw, bh = text_size(d, badge, bf)
+        r = int(max(bw, bh) * .95)
+        cx, cy = m + r, split
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=num_col)
+        d.text((cx, cy), badge, font=bf, fill=ink(ds.palette, _lum(num_col)), anchor="mm")
+        y = split + r + int(W * .04)
+        f, lines, lh = fit(d, s.get("title", ""), ds.display_font, W - 2 * m, int(H * .12), int(W * .075), 700, 1.04)
+        y = draw_lines(d, (m, y), lines, f, lh, col)
+        bf2, bl, blh = fit(d, s.get("body", ""), ds.body_font, W - 2 * m, H - y - int(W * .16), int(W * .034), 400, 1.42)
+        draw_lines(d, (m, y + int(W * .022)), bl, bf2, blh, col)
+        fy = H - int(W * .06)
+        draw_lines(d, (m, fy), [f"{i}/{total}"], pf, 0, col, align="right", box_w=W - 2 * m)
         if ds.handle:
-            draw_lines(d, (m, H - int(W * .055)), [ds.handle], pf, 0, col)
+            draw_lines(d, (m, fy), [ds.handle], pf, 0, col)
         slides.append(fx.apply(img, ds.effects, ds.palette))
-    end = Image.new("RGB", (W, H), acc)
+    # end card: the cover photo, blurred and tinted, with the call to action
+    base = load(ds.images[0] if ds.images else None, (W, H), ds.palette)
+    dark = min(ds.palette, key=_lum)
+    tint = Image.new("RGB", (W, H), _rgb(dark if _lum(dark) < 70 else "#16130F"))
+    end = Image.blend(base.filter(ImageFilter.GaussianBlur(W * .03)), tint, .62)
     d = ImageDraw.Draw(end)
-    ecol = ink(ds.palette, _lum(acc))
-    f, lines, lh = fit(d, ds.cta or "Save this for later", ds.display_font, int(W * .8), int(H * .4), int(W * .14), 700, 1.0)
+    ecol = "#FAFAF7"
+    f, lines, lh = fit(d, ds.cta or "Save this for later", ds.display_font, int(W * .8), int(H * .4), int(W * .12), 700, 1.0)
     y = int(H / 2 - len(lines) * lh / 2)
     draw_lines(d, (int(W * .1), y), lines, f, lh, ecol, align="center", box_w=int(W * .8))
-    if ds.handle:
-        hf = font(ds.body_font, int(W * .03), 600)
-        draw_lines(d, (0, int(H * .82)), [ds.handle], hf, 0, ecol, align="center", box_w=W)
-    slides.append(end)
+    hf = font(ds.body_font, int(W * .026), 600)
+    draw_lines(d, (0, int(H * .8)), ["SAVE  ·  SHARE  ·  FOLLOW" + (f"  {ds.handle}" if ds.handle else "")], hf, 0, ecol,
+               align="center", box_w=W, tracking=W * .003)
+    slides.append(fx.apply(end, ds.effects, ds.palette))
     return slides
 
 

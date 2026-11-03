@@ -112,6 +112,18 @@ def create(
             path, used = generate(req, provider)
             images.append(str(path))
             log.append(f"generated {path.name} with {used}")
+            if template == "carousel":
+                break  # one cover; the slides get their own images below
+        if template == "carousel":  # one picture per slide, so the deck doesn't repeat the cover
+            for n, s in enumerate(slides or [], start=1):
+                sp = prompt.build(s.get("subject") or f"{subject}, {s.get('title', '')}", mb, a.name, f, "slide")
+                req = GenRequest(prompt=sp["prompt"], negative=sp["negative"], out=out / f"slide-{n}.png",
+                                 width=f.width if f.width <= 1536 else 1024,
+                                 height=f.height if f.height <= 1536 else 1536, refs=refs, palette=pal,
+                                 aesthetic=a.name, seed=(seed + n) if seed is not None else None)
+                path, used = generate(req, provider)
+                images.append(str(path))
+                log.append(f"generated {path.name} with {used}")
 
     finals: list[str] = []
     for i, img in enumerate(images if template not in ("collage", "carousel") else [images[0]]):

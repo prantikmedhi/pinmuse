@@ -16,6 +16,7 @@ SPACE_FOR_TEXT = {
     "polaroid": "candid snapshot composition",
     "swiss": "bold graphic subject on one side, flat empty area on the other",
     "carousel": "clean background with room for text",
+    "slide": "striking full-frame photograph with one strong focal point, the image carries the slide on its own",
     "palette": "abstract colour study",
     "collage": "",
 }

@@ -100,3 +100,11 @@ def test_http_rejects_non_http_schemes():
     from pinmuse import http
     with pytest.raises(ValueError):
         http.request("GET", "file:///etc/passwd")
+
+
+def test_carousel_generates_one_image_per_slide(tmp_path):
+    from pinmuse.pipeline import create
+    m = create("sea at dawn", template="carousel", fmt="ig-post", title="Deck", provider="procedural",
+               out_dir=str(tmp_path), seed=1, slides=[{"title": "A", "subject": "lighthouse"}, {"title": "B"}])
+    assert len(m["base_images"]) == 3          # cover + one per slide
+    assert len(m["outputs"]) == 4              # cover, 2 slides, end card
