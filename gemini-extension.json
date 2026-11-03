@@ -1,0 +1,12 @@
+{
+  "name": "pinmuse",
+  "version": "0.1.0",
+  "description": "Explore Pinterest for inspiration and make aesthetic posters, stories and posts with any image model.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "pinmuse": {
+      "command": "uvx",
+      "args": ["--from", "pinmuse[mcp] @ git+https://github.com/prantikmedhi/pinmuse", "pinmuse", "mcp"]
+    }
+  }
+}

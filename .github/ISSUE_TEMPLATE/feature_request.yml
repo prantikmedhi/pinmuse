@@ -1,0 +1,16 @@
+name: Feature request
+description: A new aesthetic, template, format, provider or agent integration
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind?
+      options: [Aesthetic, Template, Format, Image provider, Pinterest source, Agent integration, Other]
+    validations: { required: true }
+  - type: textarea
+    id: idea
+    attributes:
+      label: Describe it
+      description: Links to Pinterest boards or example posts help a lot.
+    validations: { required: true }

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "pinmuse: Pinterest-powered creative engine for AI agents"
+message: "If you use pinmuse, please cite it."
+type: software
+authors:
+  - family-names: Medhi
+    given-names: Prantik
+repository-code: "https://github.com/prantikmedhi/pinmuse"
+license: MIT
+version: 0.1.0
+date-released: 2026-11-03
+keywords: [pinterest, ai-agents, mcp, image-generation, design-automation]

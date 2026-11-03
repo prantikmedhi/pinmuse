@@ -1,0 +1,10 @@
+{
+  "name": "pinmuse",
+  "version": "0.1.0",
+  "description": "Explore Pinterest for inspiration and make aesthetic posters, stories, carousels and posts with any image model.",
+  "author": { "name": "Prantik Medhi", "url": "https://github.com/prantikmedhi" },
+  "homepage": "https://github.com/prantikmedhi/pinmuse",
+  "repository": "https://github.com/prantikmedhi/pinmuse",
+  "license": "MIT",
+  "keywords": ["pinterest", "design", "poster", "instagram", "stories", "image-generation", "moodboard", "aesthetic"]
+}

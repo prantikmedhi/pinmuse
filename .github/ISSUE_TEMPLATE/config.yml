@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Show what you made
+    url: https://github.com/prantikmedhi/pinmuse/discussions
+    about: Share a post made with pinmuse (tag it #pinmuse)
