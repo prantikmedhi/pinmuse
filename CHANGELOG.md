@@ -6,6 +6,7 @@
 - New carousel slide layout: full-bleed photo, step badge, title and body; end card over the blurred cover.
 - Text colour is chosen by WCAG contrast ratio, fixing pale text on mid-tone backgrounds such as hot pink.
 - 6 new carousels and 4 new posters in the showcase; website rebuilt with a scroll-driven story, lightbox and swipeable decks.
+- 7 product-surreal carousels (glass, jelly, citrus, inflatable, space age, noir, clay) and 6 posters; retired 7 older designs.
 
 ## 0.1.0 — 2026-11-03
 

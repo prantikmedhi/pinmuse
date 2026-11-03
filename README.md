@@ -30,57 +30,64 @@ Each design is a single `pinmuse create` command. Images by `gpt-image-2.5-flare
 
 <table>
 <tr>
-<td width="25%"><img src="outputs/old-money-magazine.jpg" alt="Old money magazine cover Instagram story"></td>
-<td width="25%"><img src="outputs/ceramics-open-studio.jpg" alt="Pottery studio workshop Instagram story"></td>
-<td width="25%"><img src="outputs/vaporwave-story.jpg" alt="Vaporwave rooftop party Instagram story"></td>
-<td width="25%"><img src="outputs/book-club-story.jpg" alt="Dark academia book club Instagram story"></td>
+<td width="25%"><img src="outputs/fizz-story.jpg" alt="Exploding cherry soda can Instagram story"></td>
+<td width="25%"><img src="outputs/glass-koi.jpg" alt="Glass koi in liquid gold magazine story"></td>
+<td width="25%"><img src="outputs/jellyfish-story.jpg" alt="Bioluminescent jellyfish Instagram story"></td>
+<td width="25%"><img src="outputs/y2k-story.jpg" alt="Y2K product drop Instagram story"></td>
 </tr>
 <tr>
-<td><img src="outputs/neon-poster.jpg" alt="Cyberpunk neon Tokyo Pinterest poster"></td>
-<td><img src="outputs/jazz-night.jpg" alt="Jazz night event poster"></td>
-<td><img src="outputs/perfume-launch.jpg" alt="Perfume launch minimal Pinterest pin"></td>
-<td><img src="outputs/autumn-recipe.jpg" alt="Autumn apple tart recipe pin"></td>
+<td width="25%"><img src="outputs/levitating-sneaker.jpg" alt="Holographic levitating sneaker release poster"></td>
+<td width="25%"><img src="outputs/fruit-sculpture.jpg" alt="Floating fruit sculpture minimal pin"></td>
+<td width="25%"><img src="outputs/perfume-launch.jpg" alt="Perfume launch minimal Pinterest pin"></td>
+<td width="25%"><img src="outputs/autumn-recipe.jpg" alt="Autumn apple tart recipe pin"></td>
 </tr>
 <tr>
-<td><img src="outputs/croissant-launch.jpg" alt="Bakery croissant launch Instagram post"></td>
-<td><img src="outputs/matcha-menu.jpg" alt="Matcha cafe menu Instagram post"></td>
-<td><img src="outputs/record-store.jpg" alt="Record store day swiss poster"></td>
-<td><img src="outputs/desert-roadtrip.jpg" alt="Desert road trip polaroid post"></td>
+<td width="25%"><img src="outputs/croissant-launch.jpg" alt="Bakery croissant launch Instagram post"></td>
+<td width="25%"><img src="outputs/flower-computer.jpg" alt="Flowers growing from a retro computer poster"></td>
+<td width="25%"><img src="outputs/melting-chrome.jpg" alt="Melting chrome ice cream swiss poster"></td>
+<td width="25%"><img src="outputs/desert-roadtrip.jpg" alt="Desert road trip polaroid post"></td>
 </tr>
 <tr>
-<td><img src="outputs/moon-desert.jpg" alt="Surreal desert film poster with a giant moon"></td>
-<td><img src="outputs/jellyfish-story.jpg" alt="Bioluminescent jellyfish Instagram story"></td>
-<td><img src="outputs/flower-burst.jpg" alt="Exploding flower petals florist post"></td>
-<td><img src="outputs/iceland-swiss.jpg" alt="Iceland travel journal swiss poster"></td>
+<td width="25%"><img src="outputs/moon-desert.jpg" alt="Surreal desert film poster with a giant moon"></td>
+<td width="25%"><img src="outputs/record-store.jpg" alt="Record store day swiss poster"></td>
+<td width="25%"><img src="outputs/flower-burst.jpg" alt="Exploding flower petals florist post"></td>
+<td width="25%"><img src="outputs/iceland-swiss.jpg" alt="Iceland travel journal swiss poster"></td>
 </tr>
 </table>
 
 Carousels get a new photo on every slide: a cover, numbered slides and an end card. Give each slide a `subject` and pinmuse generates a picture for it.
 
 <p>
-<img src="outputs/unreal-places-1.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 1">
-<img src="outputs/unreal-places-2.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 2">
-<img src="outputs/unreal-places-3.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 3">
-<img src="outputs/unreal-places-4.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 4">
-<img src="outputs/unreal-places-5.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 5">
-<img src="outputs/unreal-places-6.jpg" width="16%" alt="Places that look unreal Instagram carousel, slide 6">
+<img src="outputs/y2k-drop-1.jpg" width="19%" alt="The chrome drop Y2K product carousel, slide 1">
+<img src="outputs/y2k-drop-2.jpg" width="19%" alt="The chrome drop Y2K product carousel, slide 2">
+<img src="outputs/y2k-drop-3.jpg" width="19%" alt="The chrome drop Y2K product carousel, slide 3">
+<img src="outputs/y2k-drop-4.jpg" width="19%" alt="The chrome drop Y2K product carousel, slide 4">
+<img src="outputs/y2k-drop-5.jpg" width="19%" alt="The chrome drop Y2K product carousel, slide 5">
 </p>
 
 <p>
-<img src="outputs/neon-photo-tips-1.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 1">
-<img src="outputs/neon-photo-tips-2.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 2">
-<img src="outputs/neon-photo-tips-3.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 3">
-<img src="outputs/neon-photo-tips-4.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 4">
-<img src="outputs/neon-photo-tips-5.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 5">
-<img src="outputs/neon-photo-tips-6.jpg" width="16%" alt="Night photography tips Instagram carousel, slide 6">
+<img src="outputs/glass-objects-1.jpg" width="19%" alt="Made of glass product carousel, slide 1">
+<img src="outputs/glass-objects-2.jpg" width="19%" alt="Made of glass product carousel, slide 2">
+<img src="outputs/glass-objects-3.jpg" width="19%" alt="Made of glass product carousel, slide 3">
+<img src="outputs/glass-objects-4.jpg" width="19%" alt="Made of glass product carousel, slide 4">
+<img src="outputs/glass-objects-5.jpg" width="19%" alt="Made of glass product carousel, slide 5">
 </p>
 
 <p>
-<img src="outputs/coffee-guide-1.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 1">
-<img src="outputs/coffee-guide-2.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 2">
-<img src="outputs/coffee-guide-3.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 3">
-<img src="outputs/coffee-guide-4.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 4">
-<img src="outputs/coffee-guide-5.jpg" width="19%" alt="Coffee guide Instagram carousel, slide 5">
+<img src="outputs/citrus-acid-1.jpg" width="19%" alt="Squeeze the day drinks carousel, slide 1">
+<img src="outputs/citrus-acid-2.jpg" width="19%" alt="Squeeze the day drinks carousel, slide 2">
+<img src="outputs/citrus-acid-3.jpg" width="19%" alt="Squeeze the day drinks carousel, slide 3">
+<img src="outputs/citrus-acid-4.jpg" width="19%" alt="Squeeze the day drinks carousel, slide 4">
+<img src="outputs/citrus-acid-5.jpg" width="19%" alt="Squeeze the day drinks carousel, slide 5">
+</p>
+
+<p>
+<img src="outputs/unreal-places-1.jpg" width="16%" alt="Places that look unreal travel carousel, slide 1">
+<img src="outputs/unreal-places-2.jpg" width="16%" alt="Places that look unreal travel carousel, slide 2">
+<img src="outputs/unreal-places-3.jpg" width="16%" alt="Places that look unreal travel carousel, slide 3">
+<img src="outputs/unreal-places-4.jpg" width="16%" alt="Places that look unreal travel carousel, slide 4">
+<img src="outputs/unreal-places-5.jpg" width="16%" alt="Places that look unreal travel carousel, slide 5">
+<img src="outputs/unreal-places-6.jpg" width="16%" alt="Places that look unreal travel carousel, slide 6">
 </p>
 
 The raw generations underneath each design are in [`outputs/photos`](outputs/photos). More on the [website](https://pinmuse.vercel.app).

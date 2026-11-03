@@ -18,18 +18,18 @@ IMG = SITE / "img"
 
 # single designs: (file, alt, label)
 WORK = [
+    ("levitating-sneaker", "Holographic sneaker levitating, release poster", "poster · pin"),
+    ("fizz-story", "Exploding cherry soda can Instagram story", "story"),
+    ("melting-chrome", "Melting chrome ice cream swiss poster", "swiss · post"),
+    ("glass-koi", "Glass koi in liquid gold magazine cover story", "magazine · story"),
+    ("fruit-sculpture", "Floating fruit sphere sculpture minimal pin", "minimal · pin"),
+    ("flower-computer", "Flowers growing from a retro computer poster", "poster · post"),
     ("moon-desert", "Surreal desert film poster with a giant moon", "poster · pin"),
-    ("old-money-magazine", "Old money magazine cover Instagram story", "magazine · story"),
     ("jellyfish-story", "Bioluminescent jellyfish aquarium story", "story"),
     ("croissant-launch", "Bakery croissant launch Instagram post", "poster · post"),
-    ("neon-poster", "Cyberpunk neon Tokyo Pinterest poster", "poster · pin"),
-    ("ceramics-open-studio", "Pottery workshop Instagram story", "magazine · story"),
     ("iceland-swiss", "Iceland travel journal swiss poster", "swiss · post"),
-    ("jazz-night", "Jazz night event poster", "poster · pin"),
     ("flower-burst", "Exploding flower petals florist post", "minimal · post"),
-    ("vaporwave-story", "Vaporwave rooftop party Instagram story", "story"),
     ("perfume-launch", "Perfume launch minimal pin", "minimal · pin"),
-    ("book-club-story", "Dark academia book club story", "story"),
     ("record-store", "Record store day swiss poster", "swiss · post"),
     ("matcha-menu", "Matcha cafe menu Instagram post", "minimal · post"),
     ("ski-chalet", "Alpine chalet magazine story", "magazine · story"),
@@ -47,19 +47,25 @@ WORK = [
 ]
 
 DECKS = [
+    ("y2k-drop", "The chrome drop", "product · y2k"),
+    ("glass-objects", "Made of glass", "objects · minimal luxe"),
+    ("jelly-tech", "Soft tech", "product · pastel dream"),
+    ("citrus-acid", "Squeeze the day", "drinks · brutalist"),
+    ("inflatable", "Everything is inflatable", "fashion · clean"),
+    ("space-age", "Space age kitchen", "retro futures · vaporwave"),
+    ("noir-edit", "The noir edit", "luxury · gothic"),
+    ("clay-world", "Made of clay", "gadgets · cottagecore"),
     ("unreal-places", "Places that look unreal", "travel · moody film"),
     ("neon-photo-tips", "Shoot the city at night", "how-to · cyberpunk neon"),
     ("coffee-guide", "Better coffee at home", "guide · earthy boho"),
-    ("gothic-reading", "Books for long dark nights", "list · dark academia"),
     ("brutalist-guide", "Concrete, but make it beautiful", "architecture · brutalist"),
-    ("y2k-drop", "The chrome drop", "product · y2k"),
     ("pastel-carousel", "Make your room feel like a dream", "tips · pastel dream"),
 ]
 
 # the scroll story: pins → moodboard → palette → photo → finished post
-STORY_RAW, STORY_FINAL = "neon-poster", "neon-poster"
-STORY_PINS = ["neon-photo-tips-slide-1", "jellyfish-story", "neon-photo-tips", "vaporwave-story", "neon-photo-tips-slide-2",
-              "y2k-drop-slide-2", "neon-photo-tips-slide-4", "neon-photo-tips-slide-3", "unreal-places-slide-2"]
+STORY_RAW, STORY_FINAL = "y2k-drop", "y2k-drop-1"
+STORY_PINS = ["y2k-drop-slide-1", "y2k-drop-2", "y2k-drop-slide-2", "y2k-drop-3", "y2k-drop", "y2k-drop-4",
+              "y2k-drop-slide-3", "y2k-drop-5", "y2k-drop-1"]
 
 
 def webp(src: Path, name: str, width: int, q: int = 80) -> tuple[str, int, int]:
