@@ -30,3 +30,8 @@ pytest -q
 
 Attach before/after images to the PR. Regenerate the offline gallery with `python examples/make_samples.py`
 and README media with `python examples/make_media.py`.
+
+## Website
+
+`site/` is the landing page at [pinmuse.vercel.app](https://pinmuse.vercel.app). Vercel deploys it on every push
+to `main` (pull requests get preview URLs). After new renders in `outputs/`, run `python site/build.py` and commit.
