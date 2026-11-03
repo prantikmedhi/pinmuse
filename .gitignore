@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+pinmuse-out/
+examples/gallery/_runs/
+.env
+outputs/_runs/

@@ -1,0 +1,26 @@
+name: Bug report
+description: Something broke or looks wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: The command you ran, what you expected, and what you got. Attach the output image if it is a layout bug.
+    validations: { required: true }
+  - type: textarea
+    id: json
+    attributes:
+      label: JSON output
+      description: pinmuse prints JSON. Paste the `{"ok": false, ...}` block or the manifest.json.
+      render: json
+  - type: input
+    id: provider
+    attributes:
+      label: Image provider
+      placeholder: openai / gemini / comfyui / procedural / ...
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: macOS 15, Python 3.12, pinmuse 0.1.0, Claude Code

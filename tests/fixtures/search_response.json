@@ -1,0 +1,41 @@
+{
+  "resource_response": {
+    "status": "success",
+    "bookmark": "-end-",
+    "data": {
+      "results": [
+        {
+          "type": "pin",
+          "id": "1111",
+          "grid_title": "Dark academia reading nook",
+          "description": "Old library vibes, candlelight, leather books and autumn evenings",
+          "dominant_color": "#3b2a1e",
+          "link": "https://example.com/nook",
+          "images": {
+            "236x": {"url": "https://i.pinimg.com/236x/aa/bb/cc/1111.jpg", "width": 236, "height": 354},
+            "orig": {"url": "https://i.pinimg.com/originals/aa/bb/cc/1111.jpg", "width": 1000, "height": 1500}
+          },
+          "aggregated_pin_data": {"aggregated_stats": {"saves": 4200}},
+          "board": {"name": "Dark Academia"},
+          "pinner": {"username": "booklover"}
+        },
+        {
+          "type": "pin",
+          "id": "2222",
+          "title": "Vintage study desk",
+          "description": "Brass lamp, poetry books, autumn study aesthetic",
+          "dominant_color": "#5a4330",
+          "images": {"736x": {"url": "https://i.pinimg.com/736x/dd/ee/ff/2222.jpg", "width": 736, "height": 1104}}
+        },
+        {
+          "type": "pin",
+          "id": "3333",
+          "is_promoted": true,
+          "grid_title": "Sponsored lamp",
+          "images": {"736x": {"url": "https://i.pinimg.com/736x/xx/3333.jpg", "width": 736, "height": 736}}
+        },
+        {"type": "story", "id": "4444"}
+      ]
+    }
+  }
+}

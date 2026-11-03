@@ -1,0 +1,13 @@
+{
+  "name": "pinmuse",
+  "owner": { "name": "Prantik Medhi", "url": "https://github.com/prantikmedhi" },
+  "plugins": [
+    {
+      "name": "pinmuse",
+      "source": "./",
+      "description": "Pinterest-powered creative engine: research pins, distill the aesthetic, generate and compose post-ready designs.",
+      "version": "0.1.0",
+      "category": "design"
+    }
+  ]
+}

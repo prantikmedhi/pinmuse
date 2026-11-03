@@ -1,0 +1,60 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pinmuse"
+version = "0.1.0"
+description = "Pinterest-powered creative engine for AI agents: explore pins, distill the aesthetic, generate images with any model, compose posters, stories and carousels."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Prantik Medhi" }]
+keywords = ["pinterest", "ai-agent", "agent-skill", "claude-code", "codex", "gemini-cli", "mcp", "mcp-server",
+            "image-generation", "gpt-image", "azure-openai", "nano-banana", "flux", "comfyui", "stable-diffusion",
+            "poster-generator", "instagram", "instagram-stories", "carousel", "moodboard", "aesthetic",
+            "social-media", "content-creation", "design-automation"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Multimedia :: Graphics",
+  "Topic :: Multimedia :: Graphics :: Editors",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["Pillow>=10.1", "numpy>=1.24"]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.2"]
+browser = ["playwright>=1.40"]
+local = ["diffusers>=0.30", "torch", "transformers", "accelerate"]
+dev = ["pytest>=8"]
+all = ["mcp>=1.2", "playwright>=1.40"]
+
+[project.scripts]
+pinmuse = "pinmuse.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/prantikmedhi/pinmuse"
+Documentation = "https://github.com/prantikmedhi/pinmuse#readme"
+Source = "https://github.com/prantikmedhi/pinmuse"
+Issues = "https://github.com/prantikmedhi/pinmuse/issues"
+Changelog = "https://github.com/prantikmedhi/pinmuse/blob/main/CHANGELOG.md"
+
+[tool.hatch.build.targets.sdist]
+exclude = ["outputs/", "docs/media/", "examples/gallery/"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pinmuse"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
